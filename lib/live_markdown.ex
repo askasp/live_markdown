@@ -30,7 +30,7 @@ defmodule LiveMarkdown do
           {k, new} end)
           |> Enum.into(%{})
 
-      Process.send_after(self(), :refres, @refresh_time)
+      Process.send_after(self(), :refresh, @refresh_time)
       {:noreply, new_pages}
   end
 
