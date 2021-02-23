@@ -36,7 +36,7 @@ defmodule LiveMarkdown do
 
 
    defp html_from_markdown(link) do
-       {:ok, {{'HTTP/1.1', 200, 'OK'}, _headers, body}} =
+       {:ok, {{_, 200, 'OK'}, _headers, body}} =
         :httpc.request(:get, {link, []}, [], [])
         body = ~s(#{body})
         Earmark.as_html!(body)
