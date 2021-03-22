@@ -16,11 +16,11 @@ defmodule LiveMarkdown do
       end
 
   def handle_call({:get, path}, _from, state) do
-      reply = case Map.get(state, path) do
-          nil -> html_from_markdown(path)
-          x -> x
+      case Map.get(state, path) do
+          nil -> tmp =html_from_markdown(path)
+                 {:reply, tmp, Map.put(state, path, tmp)}
+          x -> {:reply, x, state}
           end
-      {:reply, reply, state}
   end
 
   def handle_info(:refresh, state) do
